@@ -22,7 +22,6 @@ Gem::Specification.new do |spec|
   spec.add_development_dependency "rake"
   spec.add_development_dependency "rspec"
   spec.add_development_dependency "fuubar"
-  spec.add_development_dependency "byebug"
   spec.add_development_dependency "parallel_tests"
 
   spec.add_runtime_dependency "ducksboard", "~> 0.1.6"
