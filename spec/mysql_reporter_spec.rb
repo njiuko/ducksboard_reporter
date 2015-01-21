@@ -1,6 +1,5 @@
 require "spec_helper"
 describe DucksboardReporter::Reporters::MySqlQueriesPerSecond do
-
   it "loads and starts" do
     expect {
       reporter = DucksboardReporter::Reporters::MySqlQueriesPerSecond.new("lala")
@@ -10,10 +9,18 @@ describe DucksboardReporter::Reporters::MySqlQueriesPerSecond do
 end
 
 describe DucksboardReporter::Reporters::MySqlSlowQueries do
-
   it "loads and starts" do
     expect {
       reporter = DucksboardReporter::Reporters::MySqlSlowQueries.new("lala")
+      reporter.start
+    }.not_to raise_error
+  end
+end
+
+describe DucksboardReporter::Reporters::MySqlInnodbRowsReadsPerSecond do
+  it "loads and starts" do
+    expect {
+      reporter = DucksboardReporter::Reporters::MySqlInnodbRowsReadsPerSecond.new("lala")
       reporter.start
     }.not_to raise_error
   end
