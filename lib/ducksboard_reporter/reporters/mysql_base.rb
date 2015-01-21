@@ -1,7 +1,6 @@
 module DucksboardReporter
   module Reporters
     class MySqlBase < Reporter
-
       def collect
         stats = nil
         while true do

@@ -2,7 +2,8 @@ module DucksboardReporter
   module Reporters
     class MySqlSlowQueries < MySqlBase
       def refresh_current_stats
-        `mysqladmin status`.match(/(Slow queries: )(\d\.\d*)/)[2]
+        out = `mysqladmin status`.match(/(Slow queries: )([-+]?[0-9]*\.?[0-9]+)/[2]
+        out.nil? ? 0 : out
       end
     end
   end
