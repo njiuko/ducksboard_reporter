@@ -21,6 +21,7 @@ require "ducksboard_reporter/reporters/bandwidth"
 require "ducksboard_reporter/reporters/honeybadger"
 require "ducksboard_reporter/reporters/mysql/base"
 require "ducksboard_reporter/reporters/mysql/queries_per_second"
+require "ducksboard_reporter/reporters/mysql/slow_queries"
 
 Thread.abort_on_exception = true
 

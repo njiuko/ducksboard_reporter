@@ -8,3 +8,13 @@ describe DucksboardReporter::Reporters::MySql::QueriesPerSecond do
     }.not_to raise_error
   end
 end
+
+describe DucksboardReporter::Reporters::MySql::SlowQueries do
+
+  it "loads and starts" do
+    expect {
+      reporter = DucksboardReporter::Reporters::MySql::SlowQueries.new("lala")
+      reporter.start
+    }.not_to raise_error
+  end
+end
