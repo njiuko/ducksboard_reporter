@@ -11,7 +11,7 @@ describe DucksboardReporter::App do
   let(:widget) { app.widgets.first }
 
   it "registers reporters from config" do
-    expect(app.reporters.values.map(&:class)).to include(DucksboardReporter::Reporters::Random)
+    expect(app.reporters.values.map(&:class)).to include(DucksboardReporter::Reporters::FooBar)
   end
 
   it "registers widgets from config" do
@@ -32,7 +32,7 @@ describe DucksboardReporter::App do
   describe "single widget" do
 
     it "sets id from config" do
-      expect(widget.id).to eq(1234)
+      expect(widget.id).to eq(123123)
     end
 
     it "references reporter" do

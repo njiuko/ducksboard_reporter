@@ -1,0 +1,15 @@
+---
+api_key: YOUR_API_KEY
+
+reporters:
+  - name: foo_bar
+    type: FooBar
+    options:
+      log_file: /var/log/haproxy.log
+
+widgets:
+  - type: Box
+    id: 123123
+    reporter: foo_bar
+    value:
+      current: :value
