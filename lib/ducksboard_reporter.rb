@@ -1,5 +1,4 @@
 require "rubygems"
-require "byebug"
 require "logger"
 require "celluloid"
 require "timers"
