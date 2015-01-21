@@ -19,9 +19,9 @@ require "ducksboard_reporter/reporters/haproxy_log_requests"
 require "ducksboard_reporter/reporters/cpu_usage"
 require "ducksboard_reporter/reporters/bandwidth"
 require "ducksboard_reporter/reporters/honeybadger"
-require "ducksboard_reporter/reporters/mysql/base"
-require "ducksboard_reporter/reporters/mysql/queries_per_second"
-require "ducksboard_reporter/reporters/mysql/slow_queries"
+require "ducksboard_reporter/reporters/mysql_base"
+require "ducksboard_reporter/reporters/mysql_queries_per_second"
+require "ducksboard_reporter/reporters/mysql_slow_queries"
 
 Thread.abort_on_exception = true
 
