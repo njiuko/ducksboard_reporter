@@ -24,7 +24,6 @@ describe DucksboardReporter::Widget do
 
     it "will not crash on Net::ReadTimeout" do
       if ruby_version >= 2
-        puts "bigger!"
         expect(widget.updater).to receive(:update).and_raise(Net::ReadTimeout)
       end
 
