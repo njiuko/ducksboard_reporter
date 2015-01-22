@@ -1,8 +1,6 @@
 module DucksboardReporter
   module Reporters
     class MySqlSlowQueries < MySqlBase
-      attr_reader :sleep_time
-
       def inititialize(*args)
         @sleep_time = 60 # which time period would be good?
         super(*args)

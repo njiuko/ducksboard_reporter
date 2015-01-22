@@ -1,9 +1,15 @@
 module DucksboardReporter
   module Reporters
     class MySqlBase < Reporter
+      attr_reader :sleep_time
+
+      def initialize(*args)
+        @sleep_time ||= 1
+      end
+
       def collect
         stats = nil
-        
+
         while true do
           begin
             current_stats = refresh_current_stats
