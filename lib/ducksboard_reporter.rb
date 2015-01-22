@@ -4,7 +4,6 @@ require "celluloid"
 require "timers"
 require "ducksboard"
 require "hashie/extensions/symbolize_keys"
-Hash.include Hashie::Extensions::SymbolizeKeys
 
 require "ducksboard_reporter/version"
 require "ducksboard_reporter/reporter"
@@ -39,9 +38,22 @@ module DucksboardReporter
     attr_reader :config, :reporters, :widgets
 
     def initialize(config)
-      @config = config.symbolize_keys!
+      @config = symbolize_keys(config)
       register_reporters
       register_widgets
+    end
+
+    def symbolize_keys(hash)
+      hash.inject({}) do |result, (key, value)|
+        new_key = key.is_a?(String) ? key.to_sym : key
+        new_value = case value
+                    when Hash then symbolize_keys(value)
+                    when Array then value.map {|v| symbolize_keys(v) }
+                    else value
+                    end
+        result[new_key] = new_value
+        result
+      end
     end
 
     def start

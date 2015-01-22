@@ -14,6 +14,7 @@ describe DucksboardReporter::Widget do
 
   let(:reporter) { WidgetReporter.new("name") }
   let(:widget) { DucksboardReporter::Widget.new("Box", 1234, reporter) }
+  let(:ruby_version) { RUBY_VERSION.split(".")[0].to_i }
 
   describe "#update" do
     it "updates value from reporter" do
@@ -22,12 +23,25 @@ describe DucksboardReporter::Widget do
     end
 
     it "will not crash on Net::ReadTimeout" do
-      expect(widget.updater).to receive(:update).and_raise(Net::ReadTimeout)
+      if ruby_version >= 2
+        puts "bigger!"
+        expect(widget.updater).to receive(:update).and_raise(Net::ReadTimeout)
+      end
+
+      if ruby_version < 2
+        expect(widget.updater).to receive(:update).and_raise(TimeoutError)
+      end
       widget.update
     end
 
     it "will not crash on Net::OpenTimeout" do
-      expect(widget.updater).to receive(:update).and_raise(Net::OpenTimeout)
+      if ruby_version >= 2
+        expect(widget.updater).to receive(:update).and_raise(Net::OpenTimeout)
+      end
+
+      if ruby_version < 2
+        expect(widget.updater).to receive(:update).and_raise(TimeoutError)
+      end
       widget.update
     end
 
