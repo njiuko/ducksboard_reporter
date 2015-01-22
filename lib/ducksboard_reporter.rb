@@ -78,7 +78,6 @@ module DucksboardReporter
 
     def register_widgets
       @widgets = []
-
       @config[:widgets].each do |config|
         reporter = @reporters.fetch(config[:reporter])
 

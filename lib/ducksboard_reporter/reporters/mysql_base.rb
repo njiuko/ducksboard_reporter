@@ -1,10 +1,9 @@
 module DucksboardReporter
   module Reporters
     class MySqlBase < Reporter
-      attr_reader :sleep_time
 
-      def initialize(*args)
-        @sleep_time ||= 1
+      def sleep_time
+        1
       end
 
       def collect
@@ -21,15 +20,15 @@ module DucksboardReporter
           sleep sleep_time
 
           unless stats
-            stats = moderate_stats(current_stats)
+            stats = moderate_stats(stats, current_stats)
             next
           end
 
-          self.value = stats = moderate_stats(current_stats)
+          self.value = stats = moderate_stats(stats, current_stats)
         end
       end
 
-      def moderate_stats(stats, current_stats)
+      def moderate_stats(stat, current_stats=0)
         # default is to just take the absolute value
         current_stats
       end
