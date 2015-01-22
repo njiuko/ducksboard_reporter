@@ -3,6 +3,7 @@ module DucksboardReporter
     class MySqlBase < Reporter
       def collect
         stats = nil
+        
         while true do
           begin
             current_stats = refresh_current_stats
@@ -11,17 +12,20 @@ module DucksboardReporter
             return
           end
 
-          sleep 1
+          sleep sleep_time
 
           unless stats
-            stats = current_stats
+            stats = moderate_stats(current_stats)
             next
           end
 
-          self.value = current_stats
-
-          stats = current_stats
+          self.value = stats = moderate_stats(current_stats)
         end
+      end
+
+      def moderate_stats(stats, current_stats)
+        # default is to just take the absolute value
+        current_stats
       end
 
       def refresh_current_stats

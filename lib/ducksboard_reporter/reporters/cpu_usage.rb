@@ -1,7 +1,6 @@
 module DucksboardReporter
   module Reporters
     class CpuUsage < Reporter
-
       def collect
         stats = nil
         while true do

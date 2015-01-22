@@ -8,4 +8,3 @@ module DucksboardReporter
     end
   end
 end
-
