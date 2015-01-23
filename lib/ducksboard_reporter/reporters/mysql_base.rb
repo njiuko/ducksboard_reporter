@@ -28,7 +28,7 @@ module DucksboardReporter
         end
       end
 
-      def moderate_stats(stat, current_stats=0)
+      def moderate_stats(stat, current_stats)
         # default is to just take the absolute value
         current_stats
       end

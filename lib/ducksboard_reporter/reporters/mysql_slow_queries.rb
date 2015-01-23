@@ -8,7 +8,7 @@ module DucksboardReporter
 
       def refresh_current_stats
         out = `mysqladmin status`.match(/(Slow queries: )([-+]?[0-9]*\.?[0-9]+)/)
-        out.nil? ? 0 : out[1]
+        out.nil? ? 0 : out[2]
       end
 
       def moderate_stats(stats, current_stats)
