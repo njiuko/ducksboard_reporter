@@ -7,33 +7,33 @@ module DucksboardReporter
       end
 
       def collect
-        stats = nil
+        @old_stats ||= 0
+        @current_stats ||= 0
 
         while true do
           begin
-            current_stats = refresh_current_stats
+            @current_stats = gather_stats
           rescue Errno::ENOENT
             error("MysqlQueriesPerSecond: failed to use mysqladmin status")
             return
           end
 
-          sleep sleep_time
-
-          unless stats
-            stats = moderate_stats(stats, current_stats)
+          if @old_stats == 0
+            @old_stats = moderated_stats
             next
           end
 
-          self.value = stats = moderate_stats(stats, current_stats)
+          self.value = @old_stats = moderated_stats
+          sleep sleep_time
         end
       end
 
-      def moderate_stats(stat, current_stats)
+      def moderate_stats
         # default is to just take the absolute value
-        current_stats
+        @current_stats
       end
 
-      def refresh_current_stats
+      def gather_stats
         raise NotImplementedError
       end
     end
