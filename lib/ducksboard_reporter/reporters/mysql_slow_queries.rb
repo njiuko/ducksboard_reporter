@@ -2,7 +2,7 @@ module DucksboardReporter
   module Reporters
     class MySqlSlowQueries < MySqlBase
 
-      def sleep_time
+      def period
         60
       end
 

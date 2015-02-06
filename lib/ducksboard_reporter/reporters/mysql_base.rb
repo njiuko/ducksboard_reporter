@@ -1,31 +1,28 @@
+require 'debugger'
+
 module DucksboardReporter
   module Reporters
     class MySqlBase < Reporter
 
-      def sleep_time
+      def period
         1
       end
 
       def collect
-        @old_stats ||= 0
-        @current_stats ||= 0
-
-        while true do
-          begin
-            @current_stats = gather_stats
-          rescue Errno::ENOENT
-            error("MysqlQueriesPerSecond: failed to use mysqladmin status")
-            return
-          end
-
-          if @old_stats == 0
-            @old_stats = moderated_stats
-            next
-          end
-
-          self.value = @old_stats = moderated_stats
-          sleep sleep_time
+        every(period) do
+          update
         end
+      end
+
+      def update
+        begin
+          @current_stats = gather_stats
+        rescue Errno::ENOENT
+          error("MysqlQueriesPerSecond: failed to use mysqladmin status")
+          return
+        end
+
+        self.value = @old_stats = moderated_stats
       end
 
       def moderate_stats
