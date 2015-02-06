@@ -1,5 +1,3 @@
-require 'debugger'
-
 module DucksboardReporter
   module Reporters
     class MySqlBase < Reporter
