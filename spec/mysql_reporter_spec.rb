@@ -33,16 +33,19 @@ describe DucksboardReporter::Reporters::MySqlSlowQueries do
     EXAMPLE_OUT1 = "Uptime: 16076688  Threads: 174  Questions: 3193188096  Slow queries: 10  Opens: 2218  Flush tables: 2  Open tables: 474  Queries per second avg: 198.622"
     EXAMPLE_OUT2 = "Uptime: 16076688  Threads: 174  Questions: 3193188096  Slow queries: 30  Opens: 2218  Flush tables: 2  Open tables: 474  Queries per second avg: 198.622"
     EXAMPLE_OUT3 = "Uptime: 16076688  Threads: 174  Questions: 3193188096  Slow queries: 130  Opens: 2218  Flush tables: 2  Open tables: 474  Queries per second avg: 198.622"
+    EXAMPLE_OUT4 = "Uptime: 16076688  Threads: 174  Questions: 3193188096  Slow queries: 130  Opens: 2218  Flush tables: 2  Open tables: 474  Queries per second avg: 198.622"
 
     reporter = DucksboardReporter::Reporters::MySqlSlowQueries.new("test_reporter")
 
-    expect_any_instance_of(reporter.class).to receive(:`).and_return(EXAMPLE_OUT1, EXAMPLE_OUT2, EXAMPLE_OUT3)
+    expect_any_instance_of(reporter.class).to receive(:`).and_return(EXAMPLE_OUT1, EXAMPLE_OUT2, EXAMPLE_OUT3, EXAMPLE_OUT4)
     reporter.update
     expect(reporter.value).to eq(10)
     reporter.update
     expect(reporter.value).to eq(20)
     reporter.update
-    expect(reporter.value).to eq(110)
+    expect(reporter.value).to eq(100)
+    reporter.update
+    expect(reporter.value).to eq(0)
 
   end
 end

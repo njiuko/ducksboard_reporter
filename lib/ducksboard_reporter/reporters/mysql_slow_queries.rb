@@ -13,8 +13,9 @@ module DucksboardReporter
 
       def moderated_stats
         # in this case we want to know the delta
-        delta = @current_stats.to_i - value.to_i
-        debug(log_format("old: #{self.value}, current: #{@current_stats}, delta: #{delta}thread #{Thread.current.object_id}"))
+        delta = @current_stats.to_i - @old_stats.to_i
+        @old_stats = @current_stats
+        debug(log_format("old: #{@old_stats}, current: #{@current_stats}, delta: #{delta}, thread id: #{Thread.current.object_id}"))
         delta
       end
     end
