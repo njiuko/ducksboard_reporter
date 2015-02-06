@@ -7,6 +7,7 @@ module DucksboardReporter
       end
 
       def collect
+        update # this is important!
         every(period) do
           update
         end
@@ -20,7 +21,7 @@ module DucksboardReporter
           return
         end
 
-        self.value = @old_stats = moderated_stats
+        self.value = moderated_stats
       end
 
       def moderate_stats

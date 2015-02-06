@@ -26,7 +26,6 @@ describe DucksboardReporter::Reporters::MySqlSlowQueries do
   end
 
   it "calculates the delta per period correctly" do
-    debugger
     # example mysql status output
     # Uptime: 16076688  Threads: 174  Questions: 3193188096  Slow queries: 1235560  Opens: 2218  Flush tables: 2  Open tables: 474  Queries per second avg: 198.622
     # the way the current value is gathered:

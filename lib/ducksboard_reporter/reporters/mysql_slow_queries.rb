@@ -13,7 +13,7 @@ module DucksboardReporter
 
       def moderated_stats
         # in this case we want to know the delta
-        @current_stats.to_i - @old_stats.to_i
+        @current_stats.to_i - value.to_i
       end
     end
   end
