@@ -31,6 +31,11 @@ describe DucksboardReporter::Widget do
       widget.update
     end
 
+    it "will not crash on Errno::ECONNRESET" do
+      expect(widget.updater).to receive(:update).and_raise(Errno::ECONNRESET)
+      widget.update
+    end
+
     it "uses static values for update" do
       widget = DucksboardReporter::Widget.new("Box", 1234, reporter, value: "hello")
       expect(widget.updater).to receive(:update).with("hello")

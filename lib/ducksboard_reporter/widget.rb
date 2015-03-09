@@ -26,8 +26,9 @@ module DucksboardReporter
       debug log_format("Updating value #{value}")
 
       @updater.update(value)
-    rescue Net::ReadTimeout, Net::OpenTimeout
-      # accept timeout errors
+    rescue Net::ReadTimeout, Net::OpenTimeout, Errno::ECONNRESET => e
+      error e
+      # accept timeout errors and connection reset by peer (Errno::ECONNRESET)
     end
 
     def interval
